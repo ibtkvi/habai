@@ -1,0 +1,92 @@
+<div class="edit-device">
+
+  <form class="form-horizontal" role="form">
+    
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Название</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" placeholder="Название" ng-model="device.name">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="desc" class="col-sm-2 control-label">Комментарий</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="desc" placeholder="Комментарий" ng-model="device.desc">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="ip" class="col-sm-2 control-label">IP адрес</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="ip" placeholder="IP" ng-model="device.ip">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="url" class="col-sm-2 control-label">Админ панель</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="url" placeholder="Url" ng-model="device.url">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="login" class="col-sm-2 control-label">Логин</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="login" placeholder="Логин" ng-model="device.login">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="col-sm-2 control-label">Пароль</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="password" placeholder="Пароль" ng-model="device.password">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="ports" class="col-sm-2 control-label">Всего портов</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" id="ports" placeholder="Всего портов" ng-model="device.ports">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="my_port" class="col-sm-2 control-label">Приходящий порт</label>
+      <div class="col-sm-10">
+      <div port-selector="device.my_port" port-selector-ports="device.ports"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="parent" class="col-sm-2 control-label">Куда подключен</label>
+      <div class="col-sm-10">
+        <div device-selector="device.parent_id"></div>
+      </div>
+    </div>
+
+    <div class="form-group" ng-show="device.parent_id">
+      <label for="parent_port" class="col-sm-2 control-label">в какой порт</label>
+      <div class="col-sm-10">
+        <div port-selector="device.parent_port" port-selector-device="device.parent_id"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label"></label>
+      <div class="col-sm-10">
+        <button type="button" class="btn btn-primary" ng-disabled="waitingForServer" ng-click="saveDevice()">
+          <span class="glyphicon glyphicon-ok"></span> Сохранить
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="goBack()">Отмена</button>
+        <button style="margin-left: 50px" type="button" class="btn btn-danger" ng-show="deletable" 
+          ng-click="deleteDevice()">
+          <span class="glyphicon glyphicon-remove"></span> Удалить
+        </button>
+        
+      </div>
+    </div>
+    
+  </form>
+
+</div>

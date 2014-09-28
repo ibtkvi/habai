@@ -1,0 +1,61 @@
+<div class="edit-end-point">
+
+  <form class="form-horizontal" role="form">
+  
+    <div class="form-group">
+      <label for="customer" class="col-sm-2 control-label">Абонент</label>
+      <div class="col-sm-10">
+        <select chosen="allCustomers" allow-single-deselect="true" class="form-control" 
+          id="customer" ng-model="endPoint.customer_id" 
+          ng-options="item.customer.id as item.customer.name 
+            group by {active: 'Активные', archive: 'Архив', hidden: 'Скрытые'}[item.group]
+            for item in allCustomers">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Какие IP</label>
+      <div class="col-sm-10">
+        <select multiple chosen="allIp" class="form-control" id="inputPassword3" ng-model="selected_ip" 
+          ng-options="value for value in allIp">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">Комментарий</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputEmail3" placeholder="Комментарий" ng-model="endPoint.desc">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Куда подключен</label>
+      <div class="col-sm-10">
+        <div device-selector="endPoint.device_id"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">в какой порт</label>
+      <div class="col-sm-10">
+        <div port-selector="endPoint.device_port" port-selector-device="endPoint.device_id"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label"></label>
+      <div class="col-sm-10">
+        <button type="button" class="btn btn-primary" ng-disabled="waitingForServer" ng-click="saveEndPoint()">Сохранить</button>
+        <button type="button" class="btn btn-default" ng-click="goBack()">Отмена</button>
+        <button type="button" style="margin-left: 50px" class="btn btn-danger" ng-show="endPoint.id" ng-click="deleteEndPoint()">
+          Удалить</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>

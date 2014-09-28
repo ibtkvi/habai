@@ -1,0 +1,192 @@
+.devices {
+  .ancestors {
+    margin: 30px 0;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px #ccc solid;
+    & > * {
+      display: table-cell;
+      vertical-align: middle;
+      & > * {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+    .arrow {
+      color: #ccc;
+      font-size: 16px;
+      padding: 0 10px;
+    }
+    .device {
+      cursor: pointer;
+      .name {
+
+      }
+      .desc {
+        font-size: 0.8em;
+        color: #999;
+      }
+    }
+    .root {
+      font-size: 1.2em;
+    }
+  }
+
+  .children {
+    margin-top: 30px;
+    .child-row {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 20px;
+      margin-bottom: 3px;
+      padding: 5px;
+      border: 1px gray solid;
+      border-radius: 3px;
+      & > * {
+        display: table-cell;
+        vertical-align: middle;
+      }
+      &.highLighted {
+        border: 2px #f00 solid;
+      }
+      .port-cell {
+        padding-right: 30px;
+        font-size: 20px;
+        text-align: center;
+        height: 60px;
+      }
+      .content-cell {
+        & > * {
+          display: table-cell;
+          padding-right: 20px;
+        }
+        .desc {
+          font-size: 0.8em;
+          color: #999;
+        }
+        .edit {
+          color: #ccc;
+          cursor: pointer;
+        }
+        .end-point {
+          .other-devices {
+            a {
+              font-size: 0.8em;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .edit-device {
+    margin-top: 30px;
+  }
+
+  .edit-end-point {
+    margin-top: 30px;
+  }
+
+}
+
+
+.rotate {
+    animation: spin 1.3s linear infinite;
+}
+@keyframes spin {
+  100% { transform:rotate(360deg); } 
+}
+
+
+
+
+.slide.forward {
+  &.ng-enter {
+    animation-name: slideLeft;
+    animation-duration: 0.3s; 
+    animation-timing-function: ease-in-out; 
+    position: absolute;
+  }
+  &.ng-leave {
+    animation-name: slideRightLeaving;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out; 
+    position: absolute;
+  }
+}
+
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes slideRightLeaving {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.slide.backward {
+  &.ng-enter {
+    animation-name: slideRight;
+    animation-duration: 0.3s; 
+    animation-timing-function: ease-in-out; 
+    position: absolute;
+  }
+  &.ng-leave {
+    animation-name: slideLeftLeaving;
+    animation-duration: 0.3s; 
+    animation-timing-function: ease-in-out; 
+    position: absolute;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100%);
+  } 
+  100% {
+    transform: translateX(0%);
+  } 
+}
+@keyframes slideLeftLeaving {
+  0% {
+    transform: translateX(0%);
+  } 
+  100% {
+    transform: translateX(100%);
+  } 
+}
+
+.expandOpen {
+  animation-name: expandOpen;
+  animation-duration: 1.2s; 
+  animation-timing-function: ease-out;  
+}
+
+@keyframes expandOpen {
+  0% {
+    transform: scale(1.8);    
+  }
+  50% {
+    transform: scale(0.95);
+  } 
+  80% {
+    transform: scale(1.05);
+  }
+  90% {
+    transform: scale(0.98);
+  } 
+  100% {
+    transform: scale(1);
+  }     
+}
+

@@ -1,0 +1,6 @@
+<span ng-repeat="port in ports">
+  <button style="margin-left: 3px" class="btn btn-xs" 
+    ng-class="{'btn-primary':port.selected}" ng-click="select(port.number)">
+    {{port.number}}
+  </button> 
+</span>

@@ -1,0 +1,49 @@
+<div>
+
+  <div class="devices">
+
+    <div class="ancestors">
+
+      <div ng-repeat="ancestor in ancestors track by ancestor.id">
+        <div ng-if="ancestor.root" class="root">
+          <a href="" ui-sref="devices.show.device({deviceId: 'root'})">BUBEN</a>
+        </div>
+        <div ng-if="ancestor.device" class="arrow glyphicon glyphicon-chevron-right"></div>
+        <div ng-if="ancestor.device" class="device" ui-sref="devices.show.device({deviceId: ancestor.device.id})">
+          <div class="name">{{ancestor.device.name}}</div>
+          <div class="desc">{{ancestor.device.desc}}</div>
+          <span ng-if="status[ancestor.device.ip] === 'ok'">
+            <span class="label label-success">
+              <span class="glyphicon glyphicon-ok-sign"></span> {{ancestor.device.ip}}</span>  
+            </span>
+          <span ng-if="status[ancestor.device.ip] === 'inprog'">
+            <span class="label label-default">
+              <span class="rotate glyphicon glyphicon-refresh"></span> {{ancestor.device.ip}}
+            </span>
+          </span>
+          <span ng-if="status[ancestor.device.ip] === 'fail'">
+            <span class="label label-danger">
+              <span class="glyphicon glyphicon-exclamation-sign"></span> {{ancestor.device.ip}}</span>
+            </span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-default" ui-sref="devices.editDevice({editingDeviceId: 'new'})">
+        <span class="glyphicon glyphicon-hdd"></span> Добавить хаб</button>
+      <button class="btn btn-default" ui-sref="devices.editEndPoint({editingEndPointId: 'new'})">
+        <span class="glyphicon glyphicon-import"></span> Добавить подключение</button>
+      <button class="btn btn-primary" ng-click="updateStatus()">
+        <span class="glyphicon glyphicon-screenshot"></span> Пинг</button>
+    </div>
+    
+    <div ui-view mg-class="direction" class="slide"></div>
+  
+  </div>
+
+</div>
+
+
+

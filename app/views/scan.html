@@ -1,0 +1,13 @@
+<div ng-hide="initialized">
+  <button class="btn btn-primary" ng-click="initialize()" ng-hide="initializing">initialize</button>
+  <div ng-show="initializing">initializing...</div>
+</div>
+<div ng-show="initialized">
+  <button ng-click="scan()" ng-hide="scanning">scan</button>
+  <div ng-show="scanning">scanning...</div>
+  <div ng-show="!scanning && !diff.length && firstScanComplete">no changes</div>
+  <div ng-hide="scanning" ng-repeat="item in diff">
+    Customer name: {{item.customer.name}}<br>
+    ip: <span ng-repeat="ip in item.ip">{{ip.ip}} {{ip.status}}</span>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="children">
+
+  <div ng-repeat="childs in children" class="child-row" ng-class="{expandOpen:childs.highLighted}">
+
+    <div class="port-cell" ng-hide="isRoot">{{$index + 1}}</div>
+
+    <div class="content-cell">
+      <div ng-repeat="child in childs">
+
+        <div ng-if="child.device" class="device">
+          <span ng-show="child.upward" class="glyphicon glyphicon-globe"></span>
+          <a class="name" href="" ui-sref="devices.show.device({deviceId: child.device.id})">{{child.device.name}}</a>
+          <a ui-sref="devices.editDevice({editingDeviceId: child.device.id})"><span class="edit glyphicon glyphicon-cog"></span></a>
+          <div class="desc">{{child.device.desc}}</div>
+
+          <span ng-if="status[child.device.ip] === 'ok'" class="label label-success">
+            <span class="glyphicon glyphicon-ok-sign"></span> {{child.device.ip}}</span>
+          <span ng-if="status[child.device.ip] === 'inprog'" class="label label-default">
+            <span class="rotate glyphicon glyphicon-refresh"></span> {{child.device.ip}}</span>
+          <span ng-if="status[child.device.ip] === 'fail'" class="label label-danger">
+            <span class="glyphicon glyphicon-exclamation-sign"></span> {{child.device.ip}}</span>
+
+        </div>
+        
+        <div ng-if="child.endPoint" class="end-point">
+          <div class="name" ng-show="child.customer">
+            <span ng-hide="child.customer.active" class="glyphicon glyphicon-trash"></span>
+            <span ng-show="child.customer.hidden" class="glyphicon glyphicon-eye-close"></span>
+            {{child.customer.name}} 
+            <a ui-sref="devices.editEndPoint({editingEndPointId: child.endPoint.id})"><span class="edit glyphicon glyphicon-cog"></span></a>
+          </div>
+          <div class="desc">
+            {{child.endPoint.desc}} 
+             <a ng-show="!child.customer" ui-sref="devices.editEndPoint({editingEndPointId: child.endPoint.id})">
+              <span class="edit glyphicon glyphicon-cog"></span>
+            </a>
+          </div>
+          <div ng-if="child.otherDevices.length" class="dropdown other-devices">
+            <a data-toggle="dropdown" href="">
+              другие хабы ({{child.otherDevices.length}}) <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-repeat="item in child.otherDevices">
+                <a ng-show="item.device" href="" ng-click="gotoOtherDevice(item.device.id, child.customer.id)">{{item.device.name}}</a>
+                <a ng-show="item.root" href="" ng-click="gotoOtherDevice(null, child.customer.id)">BUBEN</a>
+              </li>
+            </ul>
+          </div>
+
+          <span ng-repeat="ip in child.ip">
+            
+            <span ng-if="status[ip.ip] === 'ok'" class="label label-success">
+              <span class="glyphicon glyphicon-ok-sign"></span> {{ip.ip}}</span>
+            <span ng-if="status[ip.ip] === 'inprog'" class="label label-default">
+              <span class="rotate glyphicon glyphicon-refresh"></span> {{ip.ip}}</span>
+            <span ng-if="status[ip.ip] === 'fail'" class="label label-danger">
+              <span class="glyphicon glyphicon-exclamation-sign"></span> {{ip.ip}}</span>
+
+          </span>
+
+        </div>
+
+        <div ng-show="child.root" class="root">
+          <span class="glyphicon glyphicon-globe"></span>
+          <a href="" ui-sref="devices.show.device({deviceId: 'root'})">BUBEN</a>
+        </div>
+
+      </div>              
+    </div>
+
+  </div>
+</div>
